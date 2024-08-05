@@ -1,0 +1,9 @@
+electricity_emb128_d2_ps32_pl96_bs16_mr0.4_ASB_True_AF_True_ICB_True_preTr_True_09_22  
+MSE:{'test': 0.13074137270450592, 'val': 0.11016623675823212}, MAE:{'test': 0.22665978968143463, 'val': 0.2037108689546585}
+
+electricity_emb128_d2_ps32_pl192_bs16_mr0.4_ASB_True_AF_True_ICB_True_preTr_True_10_18  
+MSE:{'test': 0.1456640511751175, 'val': 0.12323079258203506}, MAE:{'test': 0.23994839191436768, 'val': 0.21564821898937225}
+
+electricity_emb128_d2_ps32_pl336_bs16_mr0.4_ASB_True_AF_True_ICB_True_preTr_True_11_15  
+MSE:{'test': 0.16167691349983215, 'val': 0.13904792070388794}, MAE:{'test': 0.2570967972278595, 'val': 0.23090152442455292}
+

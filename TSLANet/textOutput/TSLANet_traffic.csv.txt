@@ -1,0 +1,3 @@
+traffic_emb128_d2_ps32_pl96_bs16_mr0.4_ASB_True_AF_True_ICB_True_preTr_True_17_41  
+MSE:{'test': 0.37150585651397705, 'val': 0.319674551486969}, MAE:{'test': 0.25841888785362244, 'val': 0.22580642998218536}
+
