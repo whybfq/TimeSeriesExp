@@ -1,4 +1,4 @@
-from data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom
+from TSLANet.Forecasting.data_loader import Dataset_ETT_hour, Dataset_ETT_minute, Dataset_Custom
 from torch.utils.data import DataLoader
 
 data_dict = {

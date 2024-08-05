@@ -169,11 +169,12 @@ class Exp_All_Task(object):
         self.model = self._build_model()
 
     def _build_model(self, ddp=True):
-        import importlib
+        # import importlib
         # module = importlib.import_module("models."+self.args.model)
         # model = module.Model(self.args, self.task_data_config_list).to(self.device_id)
 
-        TslaNet_module = importlib.import_module("TSLANet.Forecasting.TSLANet_Forecasting." + self.args.model)
+        from TSLANet.Forecasting.TSLANet_Forecasting import TSLANet
+        TslaNet_module = TSLANet()
         model = TslaNet_module.Model(self.args, self.task_data_config_list).to(self.device_id)
         if ddp:
             model = nn.parallel.DistributedDataParallel(model, device_ids=[self.device_id],
