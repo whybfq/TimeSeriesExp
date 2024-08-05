@@ -1,0 +1,167 @@
+{
+    "os": "Linux-6.5.0-44-generic-x86_64-with-glibc2.35",
+    "python": "3.11.9",
+    "heartbeatAt": "2024-07-30T03:36:11.628161",
+    "startedAt": "2024-07-30T03:36:09.891171",
+    "docker": null,
+    "cuda": null,
+    "args": [
+        "--is_training",
+        "1",
+        "--model_id",
+        "TrafficRandomOrder",
+        "--model",
+        "UniTS",
+        "--lradj",
+        "supervised",
+        "--prompt_num",
+        "10",
+        "--patch_len",
+        "16",
+        "--stride",
+        "16",
+        "--e_layers",
+        "3",
+        "--d_model",
+        "64",
+        "--des",
+        "Exp",
+        "--learning_rate",
+        "1e-4",
+        "--weight_decay",
+        "5e-6",
+        "--train_epochs",
+        "5",
+        "--batch_size",
+        "32",
+        "--acc_it",
+        "32",
+        "--debug",
+        "online",
+        "--project_name",
+        "supervised_learning",
+        "--clip_grad",
+        "100",
+        "--task_data_config_path",
+        "data_provider/multi_task.yaml"
+    ],
+    "state": "running",
+    "program": "/home/hangyi/Downloads/UniTS/run.py",
+    "codePathLocal": "run.py",
+    "codePath": "run.py",
+    "git": {
+        "remote": "https://github.com/mims-harvard/UniTS.git",
+        "commit": "ce20ae50bb3c48da021f2871d8cb204eaf070ae6"
+    },
+    "email": "13588119112@163.com",
+    "root": "/home/hangyi/Downloads/UniTS",
+    "host": "hangyi-System-Product-Name",
+    "username": "hangyi",
+    "executable": "/home/hangyi/Downloads/UniTS/.venv/bin/python",
+    "cpu_count": 10,
+    "cpu_count_logical": 16,
+    "cpu_freq": {
+        "current": 4079.1918750000004,
+        "min": 800.0,
+        "max": 4275.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 4258.608,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 4323.579,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 4345.946,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 4114.904,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 4100.0,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 4100.711,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 4007.029,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 4100.0,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 4245.02,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 4447.923,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 4165.037,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 4299.477,
+            "min": 800.0,
+            "max": 4600.0
+        },
+        {
+            "current": 3300.039,
+            "min": 800.0,
+            "max": 3300.0
+        },
+        {
+            "current": 3296.585,
+            "min": 800.0,
+            "max": 3300.0
+        },
+        {
+            "current": 3298.267,
+            "min": 800.0,
+            "max": 3300.0
+        },
+        {
+            "current": 3295.634,
+            "min": 800.0,
+            "max": 3300.0
+        }
+    ],
+    "disk": {
+        "/": {
+            "total": 915.3232879638672,
+            "used": 744.7620239257812
+        }
+    },
+    "gpu": "NVIDIA GeForce RTX 4080",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "NVIDIA GeForce RTX 4080",
+            "memory_total": 17171480576
+        }
+    ],
+    "memory": {
+        "total": 31.149898529052734
+    }
+}

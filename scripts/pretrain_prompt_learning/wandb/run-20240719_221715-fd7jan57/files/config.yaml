@@ -1,0 +1,156 @@
+wandb_version: 1
+
+fix_seed:
+  desc: null
+  value: null
+task_name:
+  desc: null
+  value: ALL_task
+is_training:
+  desc: null
+  value: 1
+model_id:
+  desc: null
+  value: UniTS_pretrain_x128
+model:
+  desc: null
+  value: UniTS
+data:
+  desc: null
+  value: All
+features:
+  desc: null
+  value: M
+target:
+  desc: null
+  value: OT
+freq:
+  desc: null
+  value: h
+task_data_config_path:
+  desc: null
+  value: data_provider/multi_task_pretrain.yaml
+subsample_pct:
+  desc: null
+  value: null
+right_prob:
+  desc: null
+  value: 0.5
+min_mask_ratio:
+  desc: null
+  value: 0.7
+max_mask_ratio:
+  desc: null
+  value: 0.8
+min_keep_ratio:
+  desc: null
+  value: 0.5
+local_rank:
+  desc: null
+  value: null
+dist_url:
+  desc: null
+  value: env://
+num_workers:
+  desc: null
+  value: 0
+itr:
+  desc: null
+  value: 1
+train_epochs:
+  desc: null
+  value: 3
+warmup_epochs:
+  desc: null
+  value: 0
+batch_size:
+  desc: null
+  value: 32
+acc_it:
+  desc: null
+  value: 128
+learning_rate:
+  desc: null
+  value: 5.0e-05
+min_lr:
+  desc: null
+  value: 0.0001
+beta2:
+  desc: null
+  value: 0.999
+weight_decay:
+  desc: null
+  value: 5.0e-06
+dropout:
+  desc: null
+  value: 0.1
+eps:
+  desc: null
+  value: 1.0e-08
+des:
+  desc: null
+  value: Exp
+debug:
+  desc: null
+  value: online
+clip_grad:
+  desc: null
+  value: null
+checkpoints:
+  desc: null
+  value: ./checkpoints/
+memory_check:
+  desc: null
+  value: true
+large_model:
+  desc: null
+  value: true
+d_model:
+  desc: null
+  value: 128
+n_heads:
+  desc: null
+  value: 8
+e_layers:
+  desc: null
+  value: 3
+patch_len:
+  desc: null
+  value: 16
+stride:
+  desc: null
+  value: 16
+prompt_num:
+  desc: null
+  value: 10
+_wandb:
+  desc: null
+  value:
+    python_version: 3.11.9
+    cli_version: 0.17.4
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1721398635
+    t:
+      1:
+      - 1
+      - 5
+      - 53
+      - 55
+      - 105
+      2:
+      - 1
+      - 5
+      - 53
+      - 55
+      - 105
+      3:
+      - 13
+      - 16
+      - 23
+      4: 3.11.9
+      5: 0.17.4
+      8:
+      - 5
+      13: linux-x86_64
