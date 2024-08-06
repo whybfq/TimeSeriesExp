@@ -1,0 +1,177 @@
+wandb_version: 1
+
+task_name:
+  desc: null
+  value: ALL_task
+is_training:
+  desc: null
+  value: 1
+model_id:
+  desc: null
+  value: Traffic
+model:
+  desc: null
+  value: TSLANet
+data:
+  desc: null
+  value: All
+features:
+  desc: null
+  value: M
+target:
+  desc: null
+  value: OT
+freq:
+  desc: null
+  value: h
+task_data_config_path:
+  desc: null
+  value: data_provider/multi_task.yaml
+subsample_pct:
+  desc: null
+  value: null
+local_rank:
+  desc: null
+  value: null
+dist_url:
+  desc: null
+  value: env://
+num_workers:
+  desc: null
+  value: 0
+memory_check:
+  desc: null
+  value: true
+large_model:
+  desc: null
+  value: true
+itr:
+  desc: null
+  value: 1
+train_epochs:
+  desc: null
+  value: 5
+prompt_tune_epoch:
+  desc: null
+  value: 0
+warmup_epochs:
+  desc: null
+  value: 0
+batch_size:
+  desc: null
+  value: 32
+acc_it:
+  desc: null
+  value: 32
+learning_rate:
+  desc: null
+  value: 0.0001
+min_lr:
+  desc: null
+  value: null
+weight_decay:
+  desc: null
+  value: 5.0e-06
+layer_decay:
+  desc: null
+  value: null
+des:
+  desc: null
+  value: Exp
+lradj:
+  desc: null
+  value: supervised
+clip_grad:
+  desc: null
+  value: 100.0
+dropout:
+  desc: null
+  value: 0.1
+checkpoints:
+  desc: null
+  value: ./checkpoints/
+pretrained_weight:
+  desc: null
+  value: null
+debug:
+  desc: null
+  value: online
+project_name:
+  desc: null
+  value: supervised_learning
+d_model:
+  desc: null
+  value: 64
+n_heads:
+  desc: null
+  value: 8
+e_layers:
+  desc: null
+  value: 3
+share_embedding:
+  desc: null
+  value: false
+patch_len:
+  desc: null
+  value: 16
+stride:
+  desc: null
+  value: 16
+prompt_num:
+  desc: null
+  value: 10
+fix_seed:
+  desc: null
+  value: null
+inverse:
+  desc: null
+  value: false
+mask_rate:
+  desc: null
+  value: 0.25
+anomaly_ratio:
+  desc: null
+  value: 1.0
+offset:
+  desc: null
+  value: 0
+max_offset:
+  desc: null
+  value: 0
+zero_shot_forecasting_new_length:
+  desc: null
+  value: null
+_wandb:
+  desc: null
+  value:
+    python_version: 3.11.9
+    cli_version: 0.17.4
+    framework: torch
+    is_jupyter_run: false
+    is_kaggle_kernel: false
+    start_time: 1722926921
+    t:
+      1:
+      - 1
+      - 5
+      - 53
+      - 55
+      - 105
+      2:
+      - 1
+      - 5
+      - 41
+      - 49
+      - 53
+      - 55
+      - 63
+      - 105
+      3:
+      - 13
+      - 16
+      - 23
+      4: 3.11.9
+      5: 0.17.4
+      8:
+      - 5
+      13: linux-x86_64

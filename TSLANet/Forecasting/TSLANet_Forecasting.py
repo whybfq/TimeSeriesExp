@@ -129,8 +129,10 @@ class TSLANet_layer(L.LightningModule):
 
 class TSLANet(nn.Module):
 
-    def __init__(self):
+    def __init__(self, args, task_data_config_list):
         super(TSLANet, self).__init__()
+        self.args = args
+        self.task_data_config_list = task_data_config_list
 
         self.patch_size = args.patch_size
         self.stride = self.patch_size // 2
