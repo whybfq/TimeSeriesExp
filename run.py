@@ -30,7 +30,7 @@ if __name__ == '__main__':
     parser.add_argument('--freq', type=str, default='h',
                         help='freq for time features encoding, options:[s:secondly, t:minutely, h:hourly, d:daily, b:business days, w:weekly, m:monthly], you can also use more detailed freq like 15min or 3h')
     parser.add_argument('--task_data_config_path', type=str,
-                        default='exp/all_task.yaml', help='root path of the task and data yaml file')
+                        default='data_provider/multi_task.yaml', help='root path of the task and data yaml file')
     parser.add_argument('--subsample_pct', type=float,
                         default=None, help='subsample percent')
 
