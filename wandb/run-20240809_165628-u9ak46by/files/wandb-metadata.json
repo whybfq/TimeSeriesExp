@@ -1,8 +1,8 @@
 {
     "os": "Linux-6.5.0-45-generic-x86_64-with-glibc2.35",
     "python": "3.11.9",
-    "heartbeatAt": "2024-08-06T08:05:33.468073",
-    "startedAt": "2024-08-06T08:05:24.549736",
+    "heartbeatAt": "2024-08-09T08:56:29.896605",
+    "startedAt": "2024-08-09T08:56:28.830902",
     "docker": null,
     "cuda": null,
     "args": [
@@ -41,9 +41,7 @@
         "--project_name",
         "supervised_learning",
         "--clip_grad",
-        "100",
-        "--task_data_config_path",
-        "data_provider/multi_task.yaml"
+        "100"
     ],
     "state": "running",
     "program": "/home/hangyi/Downloads/UniTS/run.py",
@@ -51,7 +49,7 @@
     "codePath": "run.py",
     "git": {
         "remote": "https://github.com/whybfq/TimeSeriesExp.git",
-        "commit": "31f7506ccde65f175f67d61c064272469c037443"
+        "commit": "5c5ec40378d15e652830aa55aaca52fc0b623e9d"
     },
     "email": "13588119112@163.com",
     "root": "/home/hangyi/Downloads/UniTS",
@@ -61,88 +59,88 @@
     "cpu_count": 10,
     "cpu_count_logical": 16,
     "cpu_freq": {
-        "current": 3982.54825,
+        "current": 3900.3766875,
         "min": 800.0,
         "max": 4275.0
     },
     "cpu_freq_per_core": [
         {
-            "current": 4109.175,
+            "current": 4100.0,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 4385.343,
+            "current": 4100.0,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 4198.146,
+            "current": 4099.228,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 4288.441,
+            "current": 4100.0,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 4257.385,
+            "current": 4100.032,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 4112.624,
+            "current": 4103.942,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 4105.481,
+            "current": 4099.948,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 4103.836,
+            "current": 4099.104,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 4102.551,
+            "current": 4100.0,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 4425.089,
+            "current": 4100.0,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 4330.274,
+            "current": 4100.0,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 4113.08,
+            "current": 4100.0,
             "min": 800.0,
             "max": 4600.0
         },
         {
-            "current": 3299.853,
+            "current": 3299.907,
             "min": 800.0,
             "max": 3300.0
         },
         {
-            "current": 3297.815,
+            "current": 3300.434,
             "min": 800.0,
             "max": 3300.0
         },
         {
-            "current": 3296.255,
+            "current": 3302.986,
             "min": 800.0,
             "max": 3300.0
         },
         {
-            "current": 3295.424,
+            "current": 3300.446,
             "min": 800.0,
             "max": 3300.0
         }
@@ -150,7 +148,7 @@
     "disk": {
         "/": {
             "total": 915.3232879638672,
-            "used": 688.1573066711426
+            "used": 694.9496383666992
         }
     },
     "gpu": "NVIDIA GeForce RTX 4080",
