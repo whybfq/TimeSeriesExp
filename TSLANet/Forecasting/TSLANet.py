@@ -90,42 +90,64 @@ class TSLANet(nn.Module):
         super(TSLANet, self).__init__()
         self.args = args
         self.task_data_config_list = task_data_config_list
+        self.seq_len = args.seq_len
         self.patch_len = args.patch_len
         self.stride = self.patch_len // 2
-        num_patches = int((args.seq_len - self.patch_len) / self.stride + 1)
-        self.input_layer = nn.Linear(self.patch_len, args.emb_dim)
-        dpr = [x.item() for x in torch.linspace(0, args.dropout, args.depth)]
+        num_patches = int((self.seq_len - self.patch_len) / self.stride + 1)
+
+        self.input_layer = nn.Linear(self.patch_len, configs.d_model)
+        dpr = [x.item() for x in torch.linspace(0, configs.dropout, configs.e_layers)]
         self.tsla_blocks = nn.ModuleList([
             TSLANet_layer(dim=args.emb_dim, drop=args.dropout, drop_path=dpr[i])
             for i in range(args.depth)
         ])
-        self.out_layer = nn.Linear(args.emb_dim * num_patches, args.pred_len)
+        self.out_layer = nn.Linear(configs.d_model * num_patches, self.pred_len)
 
-    def pretrain(self, x_in):
-        x = rearrange(x_in, 'b l m -> b m l')
-        x_patched = x.unfold(dimension=-1, size=self.patch_len, step=self.stride)
-        x_patched = rearrange(x_patched, 'b m n p -> (b m) n p')
-        xb_mask, _, self.mask, _ = random_masking_3D(x_patched, mask_ratio=args.mask_ratio)
-        self.mask = self.mask.bool()
-        xb_mask = self.input_layer(xb_mask)
-        for tsla_blk in self.tsla_blocks:
-            xb_mask = tsla_blk(xb_mask)
-        return xb_mask, self.input_layer(x_patched)
-
-    def forward(self, x):
+    def forward(self, x, x_mark=None):
         B, L, M = x.shape
         means = x.mean(1, keepdim=True).detach()
         x = x - means
         stdev = torch.sqrt(torch.var(x, dim=1, keepdim=True, unbiased=False) + 1e-5).detach()
         x /= stdev
+
         x = rearrange(x, 'b l m -> b m l')
         x = x.unfold(dimension=-1, size=self.patch_len, step=self.stride)
         x = rearrange(x, 'b m n p -> (b m) n p')
         x = self.input_layer(x)
+
         for tsla_blk in self.tsla_blocks:
             x = tsla_blk(x)
+
         outputs = self.out_layer(x.reshape(B * M, -1))
         outputs = rearrange(outputs, '(b m) l -> b l m', b=B)
         outputs = outputs * stdev
         outputs = outputs + means
         return outputs
+
+    def forecast(self, x_enc, x_mark_enc, x_dec, x_mark_dec):
+        # For compatibility with the UNITS interface
+        return self.forward(x_enc)
+
+    def imputation(self, x_enc, x_mark_enc, mask):
+        # Implement imputation if needed
+        pass
+
+    def anomaly_detection(self, x_enc, x_mark_enc):
+        # Implement anomaly detection if needed
+        pass
+
+    def classification(self, x_enc, x_mark_enc):
+        # Implement classification if needed
+        pass
+
+    def forward(self, x_enc, x_mark_enc=None, x_dec=None, x_mark_dec=None, mask=None, task_name='forecast'):
+        if task_name == 'long_term_forecast' or task_name == 'short_term_forecast':
+            return self.forecast(x_enc, x_mark_enc, x_dec, x_mark_dec)
+        elif task_name == 'imputation':
+            return self.imputation(x_enc, x_mark_enc, mask)
+        elif task_name == 'anomaly_detection':
+            return self.anomaly_detection(x_enc, x_mark_enc)
+        elif task_name == 'classification':
+            return self.classification(x_enc, x_mark_enc)
+        else:
+            raise ValueError(f"Unknown task name: {task_name}")
