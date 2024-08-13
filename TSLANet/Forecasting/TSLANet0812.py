@@ -3,7 +3,6 @@ import torch.nn as nn
 import lightning as L
 from einops import rearrange
 from timm.models.layers import DropPath, trunc_normal_
-from TSLANet.Forecasting.TSLANet_Forecasting import TSLANet_layer, TSLANet
 from models.UniTS import (CLSHead, PatchEmbedding, LearnablePositionalEmbedding,
                           DynamicLinear, ForecastHead, BasicBlock, F)
 
@@ -177,8 +176,9 @@ class TSLANet(nn.Module):
         # basic blocks
         self.block_num = args.e_layers
         self.blocks = nn.ModuleList(
-            [TSLANet_layer(dim=args.d_model, mlp_ratio=8., drop=args.dropout, drop_path=0., norm_layer=nn.LayerNorm) for
-             l in range(args.e_layers)]
+            [BasicBlock(dim=args.d_model, num_heads=args.n_heads, qkv_bias=False, qk_norm=False,
+                        mlp_ratio=8., proj_drop=args.dropout, attn_drop=0., drop_path=0.,
+                        init_values=None, prefix_token_length=args.prompt_num) for l in range(args.e_layers)]
         )
 
         # output processing
@@ -234,3 +234,4 @@ class TSLANet(nn.Module):
         outputs = outputs * stdev
         outputs = outputs + means
         return outputs
+

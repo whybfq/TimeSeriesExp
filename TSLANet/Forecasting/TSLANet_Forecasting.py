@@ -13,8 +13,8 @@ from timm.models.layers import DropPath
 from timm.models.layers import trunc_normal_
 from torchmetrics.regression import MeanSquaredError, MeanAbsoluteError
 
-from TSLANet.Forecasting.data_factory import data_provider
-from TSLANet.Forecasting.utils import save_copy_of_files, random_masking_3D, str2bool
+from TSLANet0812.Forecasting.data_factory import data_provider
+from TSLANet0812.Forecasting.utils import save_copy_of_files, random_masking_3D, str2bool
 
 
 class ICB(L.LightningModule):

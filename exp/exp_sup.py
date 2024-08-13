@@ -173,7 +173,7 @@ class Exp_All_Task(object):
         # module = importlib.import_module("models."+self.args.model)
         # model = module.Model(self.args, self.task_data_config_list).to(self.device_id)
 
-        from TSLANet.Forecasting.TSLANet import TSLANet
+        from TSLANet.Forecasting.TSLANet0812 import TSLANet
         model = TSLANet(self.args, self.task_data_config_list).to(self.device_id)
         if ddp:
             model = nn.parallel.DistributedDataParallel(model, device_ids=[self.device_id],
