@@ -478,14 +478,14 @@ class PatchEmbedding(nn.Module):
         self.patch_len = patch_len
         self.stride = stride
         assert self.patch_len == self.stride, "non-overlap"
-        self.value_embedding = nn.Linear(patch_len, d_model, bias=False)
+        self.value_embedding = nn.Linear(patch_len, d_model, bias=False)  # 将patch转换为embedding向量
         self.dropout = nn.Dropout(dropout)
 
     def forward(self, x):
         n_vars = x.shape[1]
         x = x.unfold(dimension=-1, size=self.patch_len, step=self.stride)
         x = torch.reshape(x, (x.shape[0] * x.shape[1], x.shape[2], x.shape[3]))
-        x = self.value_embedding(x)
+        x = self.value_embedding(x) # value_embedding线性层用于将patch转换为embedding向量
         return self.dropout(x), n_vars
 
 
@@ -706,11 +706,11 @@ class Model(nn.Module):
             mask = 1-mask
             mask = mask.permute(0, 2, 1)
             mask = self.mark2token(mask)
-            mask_repeat = mask.unsqueeze(dim=-1)
+            mask_repeat = mask.unsqueeze(dim=-1)  # mask_repeat 是一个与 x 形状相同的掩码矩阵，其中掩码位置为1，非掩码位置为0。
 
             mask_token = task_prompt
             mask_repeat = mask_repeat.repeat(1, 1, 1, x.shape[-1])
-            x = x * (1-mask_repeat) + mask_token * mask_repeat
+            x = x * (1-mask_repeat) + mask_token * mask_repeat  #x 被乘以 mask_repeat，使得掩码位置被 mask_token 替换
 
             init_full_input = torch.cat((this_prompt, x), dim=-2)
             init_mask_prompt = self.prompt2forecat(
@@ -881,9 +881,10 @@ class Model(nn.Module):
 
     def choose_masking(self, x, right_prob, min_mask_ratio, max_mask_ratio):
         # Generate a random number to decide which masking function to use
+        # 掩码表示哪些位置应该被掩码（即用 mask token 替换）
         if torch.rand(1).item() > right_prob:
             return self.random_masking(x, min_mask_ratio, max_mask_ratio)
-        else:
+        else: 
             return self.right_masking(x, min_mask_ratio, max_mask_ratio)
 
     def get_mask_seq(self, mask, seq_len):
@@ -922,21 +923,21 @@ class Model(nn.Module):
             mask_repeat = mask_repeat.repeat(1, x.shape[1], 1, x.shape[-1])
             x = x * (1-mask_repeat) + mask_token * mask_repeat  # todo
 
-            init_full_input = torch.cat((this_prompt, x), dim=-2)
-            init_mask_prompt = self.prompt2forecat(
+            init_full_input = torch.cat((this_prompt, x), dim=-2)  # init_full_input 是包含 prompt tokens 和 x 的张量
+            init_mask_prompt = self.prompt2forecat(  # init_mask_prompt 是通过 prompt2forecat 线性层生成的掩码提示。
                 init_full_input.transpose(-1, -2), x.shape[2]).transpose(-1, -2)
             # keep the unmasked tokens and fill the masked ones with init_mask_prompt.
             x = x * (1-mask_repeat) + init_mask_prompt * mask_repeat
-            x = x + self.position_embedding(x)
+            x = x + self.position_embeddsdxsing(x) # x 被加上位置嵌入，以考虑序列的顺序信息。
             mask_seq = self.get_mask_seq(mask, seq_len+padding)
             mask_seq = mask_seq[:, :seq_len]
         this_function_prompt = cls_token.repeat(x.shape[0], 1, 1, 1)
         x = torch.cat((this_prompt, x, this_function_prompt), dim=2)
 
-        x = self.backbone(x, prefix_prompt.shape[2], seq_token_len)
+        x = self.backbone(x, prefix_prompt.shape[2], seq_token_len)  # x被传递到 backbone（即 Transformer 的基本块）进行前向传播。
 
         if enable_mask:
-            mask_dec_out = self.forecast_head(
+            mask_dec_out = self.forecast_head( # 生成的预测mask输出
                 x[:, :, :-1], seq_len+padding, seq_token_len)
             mask_dec_out = mask_dec_out[:, :seq_len]
             # De-Normalization from Non-stationary Transformer
@@ -946,7 +947,7 @@ class Model(nn.Module):
             mask_dec_out = mask_dec_out + \
                 (means[:, 0, :].unsqueeze(1).repeat(
                     1, mask_dec_out.shape[1], 1))
-            cls_dec_out = self.cls_head(x, return_feature=True)
+            cls_dec_out = self.cls_head(x, return_feature=True)  # 分类部分的预测输出
             # detach grad of the forecasting on tokens
             fused_dec_out = torch.cat(
                 (cls_dec_out, x[:, :, self.prompt_num:-1].detach()), dim=2)
