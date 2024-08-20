@@ -66,7 +66,7 @@ class Adaptive_Spectral_Block(nn.Module):
         x_fft = torch.fft.rfft(x, dim=1, norm='ortho')
         weight = torch.view_as_complex(self.complex_weight)
         x_weighted = x_fft * weight
-        if args.adaptive_filter:
+        if self.adaptive_filter:
             freq_mask = self.create_adaptive_high_freq_mask(x_fft)
             x_masked = x_fft * freq_mask.to(x.device)
             weight_high = torch.view_as_complex(self.complex_weight_high)

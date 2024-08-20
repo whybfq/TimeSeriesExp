@@ -574,9 +574,9 @@ class Model(nn.Module):
 
         # Tokens settings
         self.num_task = len(configs_list)
-        self.prompt_tokens = nn.ParameterDict({})
+        self.prompt_tokens = nn.ParameterDict({})  # 通过nn.ParameterDict来存储不同数据集的prompt token
         self.mask_tokens = nn.ParameterDict({})
-        self.cls_tokens = nn.ParameterDict({})
+        self.cls_tokens = nn.ParameterDict({})  #通过nn.ParameterDict来存储不同任务的CLS token
         self.category_tokens = nn.ParameterDict({})
 
         for i in range(self.num_task):
@@ -587,7 +587,7 @@ class Model(nn.Module):
                     1, configs_list[i][1]['enc_in'], args.prompt_num, args.d_model)
                 torch.nn.init.normal_(
                     self.prompt_tokens[dataset_name], std=.02)
-                self.mask_tokens[dataset_name] = torch.zeros(
+                self.mask_tokens[dataset_name] = torch.zeros(  # mask token embedding的方式
                     1, configs_list[i][1]['enc_in'], 1, args.d_model)
 
             if configs_list[i][1]['task_name'] == 'classification':
@@ -676,7 +676,7 @@ class Model(nn.Module):
             x = F.pad(x, (0, padding))
         else:
             padding = 0
-        x, n_vars = self.patch_embeddings(x)
+        x, n_vars = self.patch_embeddings(x)  #该类将时间序列数据分割成固定长度的patch，并应用线性层进行embedding
         return x, means, stdev, n_vars, padding
 
     def prepare_prompt(self, x, n_vars, prefix_prompt, task_prompt, task_prompt_num, task_name=None, mask=None):
@@ -686,7 +686,7 @@ class Model(nn.Module):
         this_prompt = prefix_prompt.repeat(x.shape[0], 1, 1, 1)
 
         if task_name == 'forecast':
-            this_mask_prompt = task_prompt.repeat(
+            this_mask_prompt = task_prompt.repeat(  # mask token被重复并应用到输入序列中
                 x.shape[0], 1, task_prompt_num, 1)
             init_full_input = torch.cat(
                 (this_prompt, x, this_mask_prompt), dim=-2)
@@ -697,7 +697,7 @@ class Model(nn.Module):
             x[:, :, self.prompt_num:] = x[:, :, self.prompt_num:] + \
                 self.position_embedding(x[:, :, self.prompt_num:])
         elif task_name == 'classification':
-            this_function_prompt = task_prompt.repeat(x.shape[0], 1, 1, 1)
+            this_function_prompt = task_prompt.repeat(x.shape[0], 1, 1, 1)  #CLS token被重复并应用到输入序列中
             x = x + self.position_embedding(x)
             x = torch.cat((this_prompt, x, this_function_prompt), dim=2)
         elif task_name == 'imputation':
