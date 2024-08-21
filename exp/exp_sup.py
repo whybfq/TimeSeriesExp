@@ -170,11 +170,11 @@ class Exp_All_Task(object):
 
     def _build_model(self, ddp=True):
         import importlib
-        # module = importlib.import_module("models."+self.args.model)
-        # model = module.Model(self.args, self.task_data_config_list).to(self.device_id)
+        module = importlib.import_module("models."+self.args.model)
+        model = module.Model(self.args, self.task_data_config_list).to(self.device_id)
 
-        TslaNet_module = importlib.import_module("TSLANet.Forecasting.TSLANet_Forecasting." + self.args.model)
-        model = TslaNet_module.Model(self.args, self.task_data_config_list).to(self.device_id)
+        # TslaNet_module = importlib.import_module("TSLANet.Forecasting.TSLANet_Forecasting." + self.args.model)
+        # model = TslaNet_module.Model(self.args, self.task_data_config_list).to(self.device_id)
         if ddp:
             model = nn.parallel.DistributedDataParallel(model, device_ids=[self.device_id],
                                                         find_unused_parameters=True, gradient_as_bucket_view=True, static_graph=False)

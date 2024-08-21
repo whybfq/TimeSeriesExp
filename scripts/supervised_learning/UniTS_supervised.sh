@@ -1,4 +1,4 @@
-model_name=TSLANet
+model_name=UniTS
 exp_name=Traffic
 wandb_mode=online
 project_name=supervised_learning
@@ -6,7 +6,7 @@ project_name=supervised_learning
 random_port=$((RANDOM % 9000 + 1000))
 
 # Supervised learning
-torchrun --nnodes 1 --nproc-per-node=1  --master_port $random_port  run.py \
+torchrun --nnodes 1 --nproc-per-node=1  --master_port $random_port  /home/hangyi/Downloads/UniTS/run.py \
   --is_training 1 \
   --model_id $exp_name \
   --model $model_name \
