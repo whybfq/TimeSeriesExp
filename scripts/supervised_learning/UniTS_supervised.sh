@@ -25,5 +25,5 @@ torchrun --nnodes 1 --nproc-per-node=1  --master_port $random_port  run.py \
   --debug $wandb_mode \
   --project_name $project_name \
   --clip_grad 100 \
-#  --emb_dim 128 \
-  --task_data_config_path data_provider/multi_task.yaml
+  --task_data_config_path data_provider/multi_task.yaml \
+  #  --emb_dim 128 \

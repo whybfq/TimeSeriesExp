@@ -6,7 +6,6 @@ import numpy as np
 import wandb
 from utils.ddp import is_main_process, init_distributed_mode
 
-
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='UniTS supervised training')
 
@@ -14,11 +13,11 @@ if __name__ == '__main__':
     parser.add_argument('--task_name', type=str, required=False, default='ALL_task',
                         help='task name')
     parser.add_argument('--is_training', type=int,
-                        required=True, default=1, help='status')
-    parser.add_argument('--model_id', type=str, required=True,
-                        default='test', help='model id')
-    parser.add_argument('--model', type=str, required=True, default='UniTS',
-                        help='model name')
+                        required=False, default=1, help='status')
+    parser.add_argument('--model_id', type=str, required=False,
+                        default='Traffic', help='model id')  # Set default based on your bash script
+    parser.add_argument('--model', type=str, required=False, default='TSLANet',
+                        help='model name')  # Set default based on your bash script
 
     # data loader
     parser.add_argument('--data', type=str, required=False,
@@ -46,49 +45,52 @@ if __name__ == '__main__':
     # optimization
     parser.add_argument('--itr', type=int, default=1, help='experiments times')
     parser.add_argument('--train_epochs', type=int,
-                        default=10, help='train epochs')
+                        required=False, default=5, help='train epochs')  # Updated to 5 as per the bash script
     parser.add_argument("--prompt_tune_epoch", type=int, default=0)
     parser.add_argument('--warmup_epochs', type=int,
                         default=0, help='warmup epochs')
     parser.add_argument('--batch_size', type=int, default=32,
                         help='batch size of train input data')
-    parser.add_argument('--acc_it', type=int, default=1,
+    parser.add_argument('--acc_it', type=int, default=32,
                         help='acc iteration to enlarge batch size')
     parser.add_argument('--learning_rate', type=float,
                         default=0.0001, help='optimizer learning rate')
     parser.add_argument('--min_lr', type=float, default=None,
                         help='optimizer min learning rate')
     parser.add_argument('--weight_decay', type=float,
-                        default=0.0, help='optimizer weight decay')
+                        default=5e-6, help='optimizer weight decay')  # Updated to 5e-6 as per the bash script
     parser.add_argument('--layer_decay', type=float,
                         default=None, help='optimizer layer decay')
-    parser.add_argument('--des', type=str, default='test',
-                        help='exp description')
+    parser.add_argument('--des', type=str, default='Exp',
+                        help='exp description')  # Updated to 'Exp' as per the bash script
     parser.add_argument('--lradj', type=str,
                         default='supervised', help='adjust learning rate')
-    parser.add_argument('--clip_grad', type=float, default=None, metavar='NORM',
-                        help='Clip gradient norm (default: None, no clipping)')
+    parser.add_argument('--clip_grad', type=float, default=100, metavar='NORM',
+                        help='Clip gradient norm (default: 100 as per the bash script)')
     parser.add_argument('--dropout', type=float, default=0.1, help='dropout')
     parser.add_argument('--checkpoints', type=str, default='./checkpoints/',
                         help='save location of model checkpoints')
     parser.add_argument('--pretrained_weight', type=str, default=None,
                         help='location of pretrained model checkpoints')
     parser.add_argument('--debug', type=str,
-                        default='enabled', help='disabled')
+                        default='online', help='wandb mode (default: online)')  # Updated to 'online'
     parser.add_argument('--project_name', type=str,
-                        default='tsfm-multitask', help='wandb project name')
+                        default='supervised_learning', help='wandb project name')  # Updated to 'supervised_learning'
 
     # model settings
-    parser.add_argument('--d_model', type=int, default=512,
-                        help='dimension of model')
+    parser.add_argument('--d_model', type=int, default=64,
+                        help='dimension of model')  # Updated to 64 as per the bash script
     parser.add_argument('--n_heads', type=int, default=8, help='num of heads')
-    parser.add_argument('--e_layers', type=int, default=2,
-                        help='num of encoder layers')
+    parser.add_argument('--e_layers', type=int, default=3,
+                        help='num of encoder layers')  # Updated to 3 as per the bash script
     parser.add_argument("--share_embedding",
                         action="store_true", default=False)
-    parser.add_argument("--patch_len", type=int, default=16)
-    parser.add_argument("--stride", type=int, default=8)
-    parser.add_argument("--prompt_num", type=int, default=5)
+    parser.add_argument("--patch_len", type=int, default=16,
+                        help='patch length')  # Updated to 16 as per the bash script
+    parser.add_argument("--stride", type=int, default=16,
+                        help='stride')  # Updated to 16 as per the bash script
+    parser.add_argument("--prompt_num", type=int, default=10,
+                        help='number of prompts')  # Updated to 10 as per the bash script
     parser.add_argument('--fix_seed', type=int, default=None, help='seed')
 
     # task related settings
