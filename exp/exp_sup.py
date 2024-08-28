@@ -885,7 +885,7 @@ class Exp_All_Task(object):
         return mse, mae
 
     def split_batch(self, batch, small_batch_size, task_name):
-        def split_tensor(tensor, size):
+        def split_tensor(tensor, size):  # args=['-u','run.py']
             return [tensor[i:min(i + size, tensor.size(0))] for i in range(0, tensor.size(0), size)]
         if task_name == 'classification':
             batch_x, label, padding_mask = batch
