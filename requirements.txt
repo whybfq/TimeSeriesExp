@@ -15,3 +15,4 @@ wandb
 gluonts
 orjson
 torch
+apex

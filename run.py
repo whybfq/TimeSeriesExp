@@ -16,7 +16,7 @@ if __name__ == '__main__':
                         required=False, default=1, help='status')
     parser.add_argument('--model_id', type=str, required=False,
                         default='Traffic', help='model id')  # Set default based on your bash script
-    parser.add_argument('--model', type=str, required=False, default='TSLANet',  # UniTS
+    parser.add_argument('--model', type=str, required=False, default='TSLANet',  # UniTS/TSLANet
                         help='model name')  # Set default based on your bash script
 
     # data loader
