@@ -1,4 +1,4 @@
-model_name=TSLANet
+model_name=UniTS
 exp_name=Traffic
 wandb_mode=online
 project_name=supervised_learning

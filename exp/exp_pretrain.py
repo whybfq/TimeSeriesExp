@@ -4,6 +4,7 @@ from utils.tools import NativeScalerWithGradNormCount as NativeScaler
 from utils.losses import UnifiedMaskRecLoss
 from utils.dataloader import BalancedDataLoaderIterator
 from utils.ddp import is_main_process, get_world_size
+from taskgrouping.train_taskonomy import get_losses_and_tasks
 
 import torch
 import torch.nn as nn
@@ -65,6 +66,7 @@ def init_and_merge_datasets(data_loader_list):
     train_steps = dataloader.__len__()
 
     return dataloader, train_steps
+
 
 
 class Exp_All_Task(object):
