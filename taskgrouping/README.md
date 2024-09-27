@@ -29,7 +29,7 @@ labels:
 order.
 
 usage example
-```
+```bash
 python3 train_taskonomy.py -d=/taskonomy_data/ -a=xception_taskonomy_new -j 4 -b 96 -lr=.1 --fp16 -sbn --tasks=sdnerac -r
 ```
 
@@ -40,8 +40,12 @@ https://drive.google.com/drive/folders/1XQVpv6Yyz5CRGNxetO0LTXuTvMS_w5R5?usp=sha
 
 to test these models on the test set:
 
-```
+```bash
 python3 train_taskonomy.py -d=/taskonomy_data/ -a=xception_taskonomy_new -j 4 -b 256 -lr=.1 --fp16 -sbn --tasks=[task letters] --resume=setting2_models/xception_taskonomy_new_[task letters].pth.tar -t -r
+```
+
+```bash
+python3 train_taskonomy.py -d=/taskonomy_data/ -a=xception_taskonomy_new -j 4 -b 256 -lr=.1 --fp16 -sbn --tasks=dk --resume=setting2_models/xception_taskonomy_new_dk.pth.tar -t -r
 ```
 
 (contact for models from other settings)

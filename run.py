@@ -148,13 +148,9 @@ if __name__ == '__main__':
         )
 
     # 获取loss函数和任务
-    # 假设您已经定义了其他必要的参数和设置
-    parser = argparse.ArgumentParser(description='UniTS Training with Taskonomy Losses')
-    # 添加其他必要的参数
-    args = parser.parse_args()
-
-    # 获取loss函数和任务
-    taskonomy_loss, losses, criteria, taskonomy_tasks = get_losses_and_tasks(args)
+    # parser = argparse.ArgumentParser(description='UniTS Training with Taskonomy Losses')  # 假设您已经定义了其他必要的参数和设置
+    # args = parser.parse_args()   # 添加其他必要的参数
+    # taskonomy_loss, losses, criteria, taskonomy_tasks = get_losses_and_tasks(args)  # 获取loss函数和任务
 
     Exp = Exp_All_Task_SUP
 
